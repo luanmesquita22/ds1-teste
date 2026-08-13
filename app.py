@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request
 
 # Instancia do servidor do Flask
 app = Flask(__name__)
@@ -6,17 +6,19 @@ app = Flask(__name__)
 # Rota 1: Pagina inicial
 @app.route('/')
 def home():
-    return "<h1>Servido Flask rodando!</h1>" "<h1>Bem-vindo ao meu servidor Flask!</h1>"
+    return render_template("index.html")
 
 # Rota 2: Sobre a aplicação
-@app.route('/sobre')
-def sobre():
-    return "<h1>Sobre a aplicação</h1>" "<p>Esta é uma simples aplicação Flask.</p>"
+@app.route('/cadastro')
+def pagina_cadastro():
+    return render_template("cadastro.html")
 
-# Rota 3: Status da aplicação
-@app.route('/status')
-def status():
-    return "<h1>Status da aplicação</h1>" "<p>O servidor Flask esta rodando corretamente.</p>"
+# Rota 3: processamento dos dados Metodo (POST)
+@app.route('/salvar', methods=["POST"])
+def salvar_cadastro():
+    nome_digitado = request.form.get("Campo_nome")
+    info_digitado = request.form.get("campo_info")
 
+    return render_template ("resultado.html", nome=nome_digitado, info=info_digitada)
 if __name__ == '__main__':
     app.run(debug=True)
