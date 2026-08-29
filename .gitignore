@@ -13,3 +13,8 @@ ENV/
 
 #Arquivos de variaveis de ambientes
 .env
+
+
+#Banco de dados local SQLlite e pastas do flask 
+*.db
+instance/
